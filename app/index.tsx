@@ -9,7 +9,7 @@ import { View } from 'react-native'
 const CalculatorApp = () => {
 
     const {
-        formula, buildNumber, clean, toggleSign
+        formula, buildNumber, clean, toggleSign, deleteLast
     } = useCalculator()
 
     return (
@@ -39,7 +39,7 @@ const CalculatorApp = () => {
                     label='del' 
                     blackText
                     color={Colors.lightGray} 
-                    onPress={() => buildNumber('del')} 
+                    onPress={deleteLast} 
                 />
                 <CalculatorButton 
                     label='/' 

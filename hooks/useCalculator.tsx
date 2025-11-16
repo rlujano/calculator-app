@@ -35,6 +35,25 @@ export const useCalculator = () => {
         setNumber('-' + number);
     }
 
+    const deleteLast = () => {
+        // Por mejorar la logica para borrar
+        console.log(number);
+        if(number.includes('-')){
+            if(number.length > 2){
+                setNumber(number.slice(0, -1));
+            }else{
+                setNumber('0');
+            }
+        } else {
+            if(number.length > 1){
+                setNumber(number.slice(0, -1));
+            }else{
+                setNumber('0');
+            }
+        }
+        
+    }
+
     const buildNumber = (numberString: string) => {
         // Verificar si existe el punto decimal
         if(number.includes('.') && numberString === '.') return;
@@ -72,6 +91,7 @@ export const useCalculator = () => {
         buildNumber,
         clean,
         toggleSign,
+        deleteLast
 
     }
 }
