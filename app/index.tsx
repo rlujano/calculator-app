@@ -9,7 +9,7 @@ import { View } from 'react-native'
 const CalculatorApp = () => {
 
     const {
-        formula, buildNumber, clean, toggleSign, deleteLast
+        formula, buildNumber, prevNumber, clean, toggleSign, deleteLast, divideOperation, multiplyOperation,subtractOperation, addOperation
     } = useCalculator()
 
     return (
@@ -17,7 +17,11 @@ const CalculatorApp = () => {
             {/* Resultados */}
             <View style={{ paddingHorizontal: 30, marginBottom: 20 }}>
                 <ThemeText variant='h1'>{ formula }</ThemeText>
-                <ThemeText variant='h2'>250</ThemeText>
+                { formula === prevNumber ? (
+                    <ThemeText variant='h2'></ThemeText>
+                ) : (
+                    <ThemeText variant='h2'>{prevNumber}</ThemeText>
+                )}
             </View>
 
             {/* Botones */}
@@ -44,7 +48,7 @@ const CalculatorApp = () => {
                 <CalculatorButton 
                     label='/' 
                     color={Colors.orange}
-                    onPress={() => buildNumber('/')} 
+                    onPress={divideOperation} 
                 />
             </View>
 
@@ -70,7 +74,7 @@ const CalculatorApp = () => {
                 <CalculatorButton 
                     label='X' 
                     color={Colors.orange}
-                    onPress={() => buildNumber('X')} 
+                    onPress={multiplyOperation} 
                 />
             </View>
 
@@ -96,7 +100,7 @@ const CalculatorApp = () => {
                 <CalculatorButton 
                     label='-' 
                     color={Colors.orange}
-                    onPress={() => buildNumber('-')} 
+                    onPress={subtractOperation} 
                 />
             </View>
 
@@ -122,7 +126,7 @@ const CalculatorApp = () => {
                 <CalculatorButton 
                     label='+' 
                     color={Colors.orange}
-                    onPress={() => buildNumber('+')} 
+                    onPress={addOperation} 
                 />
             </View>
 

@@ -15,7 +15,18 @@ export const useCalculator = () => {
     const lastOperation = useRef<Operator | undefined>(undefined);
 
     useEffect(() => {
-        setFormula(number)
+        if(lastOperation.current) {
+            const firstFormulaPart = formula.split(' ').at(0);
+            console.log(firstFormulaPart);
+            setFormula(`${firstFormulaPart} ${lastOperation.current} ${number}`)
+        } else {
+            setFormula(number)
+        }
+    }, [number])
+    
+
+    useEffect(() => {
+        // setFormula(number)
     }, [number])
 
     const clean = () => {
@@ -52,6 +63,34 @@ export const useCalculator = () => {
             }
         }
         
+    }
+
+    const setLastNumber = () => {
+        if(number.endsWith('.')) {
+            setPrevNumber(number.slice(0, -1))
+        }
+        setPrevNumber(number);
+        setNumber('0');
+    }
+
+    const divideOperation = () => {
+        setLastNumber();
+        lastOperation.current = Operator.divide; 
+    }
+
+    const multiplyOperation = () => {
+        setLastNumber();
+        lastOperation.current = Operator.multiply; 
+    }
+
+    const subtractOperation = () => {
+        setLastNumber();
+        lastOperation.current = Operator.subtract; 
+    }
+
+    const addOperation = () => {
+        setLastNumber();
+        lastOperation.current = Operator.add; 
     }
 
     const buildNumber = (numberString: string) => {
@@ -91,7 +130,10 @@ export const useCalculator = () => {
         buildNumber,
         clean,
         toggleSign,
-        deleteLast
-
+        deleteLast,
+        divideOperation,
+        multiplyOperation,
+        subtractOperation,
+        addOperation
     }
 }
